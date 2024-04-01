@@ -5,7 +5,7 @@ interface userProps {
 }
 const UserDetails:React.FC<userProps> = ({currColor}) => {
   return (
-    <div className='w-full px-2 border border-gray-700 '>
+    <div className='w-full px-2  '>
     <div className={`w-full h-8 my-5 border border-gray-700 rounded ${currColor? 'bg-[#222426]':'bg-[#fff]'}`} >
         <p className='w-full text-[16px] text-left ml-3 mt-1'>Lead Details</p>
     </div>

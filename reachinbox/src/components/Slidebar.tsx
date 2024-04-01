@@ -4,17 +4,19 @@ import Icon from './Icons';
 
 interface SlidebarProps {
     currColor: Boolean;
-    username: string
+    username: string;
+    showEmailDesktop:number;
+    handleChange:any
 }
 
-const icons: string[] = ["Home", "UserRoundSearchIcon", "Mail", "Send", "List", "InboxIcon", "BarChart2"]
 
-const Slidebar: React.FC<SlidebarProps> = ({ currColor, username }) => {
+const Slidebar: React.FC<SlidebarProps> = ({ currColor, username,handleChange }) => {
 
     const [activeIcon, setActiveIcon] = useState<number>(0);
 
     const handleIconClick = (index: number) => {
         setActiveIcon(index);
+        handleChange(index)
     };
 
     return (
