@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react'
 import Slidebar from '../components/Slidebar'
 import Theme from '../components/Theme';
 import Workspace from '../components/Workspace';
-import EmptySectionImage from '../components/EmptySectionImage';
 import { useLocation } from 'react-router';
 import { jwtDecode } from "jwt-decode";
-import { ChevronDown, RotateCw, Search } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { getMailList } from '../actions/actions';
 import InboxEmailCard from '../components/InboxEmailCard';
 import InboxHeader from '../components/InboxHeader';
@@ -21,11 +20,9 @@ const Desktop = () => {
     const location = useLocation();
     const [ loginDone,setLogin]= useState(false)
   
-    // const handleLogin = ()=>{
-    //   setTimeout(()=> {setLogin(true)},3000)
-    // }
+
     let token:string =localStorage.getItem("reachinbox-auth") || takeToken()
-    // console.log(token)
+    
     useEffect(()=>{
       
       token = location.search.split("?token=")?.join("") ;
@@ -75,7 +72,7 @@ const Desktop = () => {
                     </div>
                 </div>
                 {
-                data.length==0 ? <LoadingPage/>
+                data.length ===0 ? <LoadingPage/>
                 : <div className={`flex border ${currColor ? "border-gray-700" : "border-gray-300"} `}>
                     <div className='w-[275px] ml-5  pr-3'>
                         <div className='flex justify-between mt-4 items-center'>
