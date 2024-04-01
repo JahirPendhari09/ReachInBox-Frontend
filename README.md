@@ -22,12 +22,13 @@ The application is deployed on netlify and can be accessed [here]().
 
 ## After Login with Dark Mode
 
-![Screenshot (345)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/4de95e34-834b-4835-927f-fc17a07dbd3c)
+![Screenshot (349)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/491990b3-738f-4118-940f-c4937522dbe8)
+
 
 ## After Login with Light Mode
 
-![Screenshot (348)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/35d8a374-f70d-4a1e-bec1-097adeab31f2)
 
+![Screenshot (350)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/427b446b-f934-4188-9b30-237b6b3a57ad)
 
 
  # How to Run <br/>
