@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router'
 import Login from '../pages/Login'
 import Deskstop from '../pages/Desktop '
 
-const AllRoutes = () => {
+const AllRoutes:React.FC = () => {
   return (
     <div>
       <Routes>

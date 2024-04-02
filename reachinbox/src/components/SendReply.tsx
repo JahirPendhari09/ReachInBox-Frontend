@@ -28,15 +28,21 @@ const initalState:initalstateType = {
 const SendReply:React.FC<sendReplyProps> = ({currColor,handleCancel,singleMail}) => {
 
   const [formData , setFormData ]= useState(initalState);
+  let token:string | null;
+
 
   useEffect(()=>{
+    token = localStorage.getItem("reachinbox-auth");
+    token = token ? JSON.parse(token) : "";
+    console.log("token :-", token)
+
     setFormData({...formData, toName:singleMail.toName, fromName:singleMail.fromEmail ,
-    to:singleMail.toEmail, from:singleMail.fromName})
+    to:singleMail.toEmail, from:singleMail.fromEmail})
   },[]);
 
   const handlesubmit = () => {
     console.log(formData,"data")
-    postMailMasseges(singleMail.threadId,formData).then((res:any)=> {
+    postMailMasseges(singleMail.threadId,formData,token).then((res:any)=> {
         alert("Reply has been Sended")
        
     }).catch(err=> console.log(err));

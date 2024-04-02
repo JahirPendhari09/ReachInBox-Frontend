@@ -5,31 +5,43 @@ import Workspace from '../components/Workspace';
 import { useLocation } from 'react-router';
 import { jwtDecode } from "jwt-decode";
 import { ChevronDown } from 'lucide-react';
-import { getMailList, getMailMasseges } from '../actions/actions';
+import { deleteMailResponse, getMailList, getMailMasseges } from '../actions/actions';
 import InboxEmailCard from '../components/InboxEmailCard';
 import InboxHeader from '../components/InboxHeader';
 import LoadingPage from '../components/LoadingPage';
 import SearchBar from '../components/SearchBar';
 import UserDetails from '../components/UserDetails';
 import ReplySection from '../components/ReplySection';
+import { Modal } from './Modal';
 
 const Desktop = () => {
     const [currColor, setCurrColor] = useState<Boolean>(true);
     const [data , setData ]= useState([]);
-    const [singleMail , setSingleMail ]= useState({})
+    const [singleMail , setSingleMail ]= useState<any>({})
 
     const location = useLocation();
     const [ showEmailDesktop,setShowEmailDesktop]= useState(0)
 
     let token:string =localStorage.getItem("reachinbox-auth") || takeToken();
+    
+    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+    const openModal = (): void => {
+      setIsModalOpen(true);
+    };
+  
+    const closeModal = (): void => {
+      setIsModalOpen(false);
+    };
 
     const fetchData =()=>{
-        getMailList().then(res => {
+        getMailList(token).then(res => {
+        console.log(res)
            setData(res);
-            if (res.length > 0) {
+            if (res?.length > 0) {
                setSingleMail(res[0]);
                 const id: number = res[0]?.threadId;
-                if (id !== undefined)  return getMailMasseges(id);
+                if (id !== undefined)  return getMailMasseges(id,token);
                 else  console.log("error id not found")
                 
             } else  console.log("Email not Found")
@@ -39,7 +51,6 @@ const Desktop = () => {
     }
     
     useEffect(()=>{
-      
       token = location.search.split("?token=")?.join("") ;
       if(token)
       {
@@ -49,9 +60,7 @@ const Desktop = () => {
         localStorage.setItem("reachinbox-auth-lastname",JSON.stringify((ParseData as any).user.lastName));
         localStorage.setItem("reachinbox-auth-email",JSON.stringify((ParseData as any).user.email));
       }
-
       fetchData()
-
     },[token]);
   
     function takeToken(): string {
@@ -67,17 +76,46 @@ const Desktop = () => {
     useEffect(()=>{},[singleMail,showEmailDesktop])
    
     const handleChangeEmail = (id: number) => {
-        getMailMasseges(id).then(messages => setSingleMail(messages))
+        getMailMasseges(id,token).then(messages =>{
+            setSingleMail(messages);
+            setShowEmailDesktop(5)
+        }) 
         .catch(error => console.error('Error:', error));
     }
 
-    const handleChange=(index:number)=> setShowEmailDesktop(index)
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+          if(event.key === "d" || event.key === "D")
+          {
+            openModal();
+          }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+    
+        return () => {
+          window.removeEventListener('keydown', handleKeyDown);
+        };
+      }, [isModalOpen]);
+
+    const handleChange=(index:number)=> setShowEmailDesktop(index);
+
+    const deleteEmail =()=>{
+        const id:number = singleMail[0].threadId
+        deleteMailResponse(id,token).then((res)=>{
+            alert(`The ${id} has been Deleted Successful`)
+            // fetchData()
+            closeModal()
+        }).catch(err => alert("Error Please try again"))
+        
+    }
 
     let firstName = localStorage.getItem('reachinbox-auth-firstname');
     firstName = firstName ? JSON.parse(firstName):''
     let lastName = localStorage.getItem('reachinbox-auth-lastname') 
     lastName = lastName ? JSON.parse(lastName):''
     const username = firstName ? (firstName[0] + (lastName ? lastName[0] : '')) : '';
+
     return (
         <div className={`w-full h-full m-auto max-w-[1440px] ${currColor ? "bg-black" : "bg-white"} ${currColor ? "text-white" : "text-black"} h-10 flex`}>
             <div className='w-[56px] h-screen '>
@@ -115,7 +153,7 @@ const Desktop = () => {
                         <hr className='mt-2.5'/>
                         <div className=' text-left'>
                             {
-                                data.length >0 && data.map((item:any) =>{
+                                data?.length >0 && data.map((item:any) =>{
                                     return <div key={item.id}>
                                         <InboxEmailCard currColor = {currColor} {...item} handleChangeEmail={handleChangeEmail}/>
                                         <hr />
@@ -128,6 +166,21 @@ const Desktop = () => {
                     <UserDetails currColor={currColor}/>
                 </div>
                 }
+            </div>
+            <div>
+                <Modal isOpen={isModalOpen} onClose={closeModal}>
+                    <div className='w-[440px] h-[240px] text-white '>
+                        <div className=' h-full '>
+                            <h1 className='text-[24px] font-bold mt-8'>Are you Sure ?</h1>
+                            <p className='mt-8 text-[#E8E8E8]'>Your selected email will be deleted.</p>
+                            <div className='mt-8 flex justify-center gap-5 '>
+                                <button className='w-[120px] h-12 bg-[#25262B] ' onClick={closeModal}>Cancel</button>
+                                <button className='w-[140px] h-12 bg-[#FA5252] ' onClick={deleteEmail}>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </Modal>
+
             </div>
         </div>
     );

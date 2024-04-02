@@ -1,6 +1,5 @@
 import { ChevronDown, Reply } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
-import { Modal } from '../pages/Modal';
 import SingleMail from './SingleMail';
 import SendReply from './SendReply';
 
@@ -12,20 +11,7 @@ interface replyProps {
 
 const ReplySection:React.FC<replyProps> = ({currColor,singleMail}) => {
     const [showReply , setShowReply] = useState<Boolean>(false);
-    const [deleteEmail , setDeleteEmail]= useState<Boolean>(false);
-
-    const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-    const openModal = (): void => {
-      setIsModalOpen(true);
-    };
-  
-    const closeModal = (): void => {
-      setIsModalOpen(false);
-    };
-    const d = ()=>{
-        console.log("d clicked")
-    }
+    
 
     useEffect(() => {
         
@@ -33,36 +19,23 @@ const ReplySection:React.FC<replyProps> = ({currColor,singleMail}) => {
           if (event.key === 'r' || event.key === "R") {
             setShowReply(true)
           }
-          else if(event.key === "d" || event.key === "D")
-          {
-            setDeleteEmail(!deleteEmail)
-            
-          }
+          
         };
         window.addEventListener('keydown', handleKeyDown);
     
         return () => {
           window.removeEventListener('keydown', handleKeyDown);
         };
-      }, [showReply,deleteEmail]);
+      }, [showReply]);
 
 
-    if(deleteEmail){
-        return <div>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-                <div className='w-screen h-screen '>
-                    
-                </div>
-            </Modal>
-        </div>
-    }
     return (
     <div  className='w-[800px] h-[600px] border border-gray-700 flex justify-between flex-col '>
         <div className=' relative w-[800px] flex justify-between flex-col ' >
             <div className='flex h-[70px] border border-gray-700 py-3 pl-4'>
                 <div className='text-left w-full'>
-                    <h1 className='text-[14px]'>{singleMail[0].fromName}</h1>
-                    <p className='text-[12px] text-gray-400'>{singleMail[0].toEmail}</p>
+                    <h1 className='text-[14px]'>{ singleMail && singleMail[0]?.fromName}</h1>
+                    <p className='text-[12px] text-gray-400'>{singleMail && singleMail[0]?.toEmail}</p>
                </div>
                 <div className='flex justify-end mr-6  gap-4 h-8 my-2 w-full text-right'>
                     <div className={`flex justify-center gap-2 p-2 items-center border border-gray-700 rounded ${currColor? 'bg-[#222426]':'bg-[#fff]'}`} >
@@ -81,7 +54,7 @@ const ReplySection:React.FC<replyProps> = ({currColor,singleMail}) => {
             </div>
             <div className='py-3 pl-4 '>
                 {
-                    singleMail.length >0 && singleMail.map((item:any)=>{
+                    singleMail?.length >0 && singleMail?.map((item:any)=>{
                         return <SingleMail currColor={currColor} {...item} key={item.id}/>
                     })
                 }
