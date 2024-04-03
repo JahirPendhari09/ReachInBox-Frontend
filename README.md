@@ -13,6 +13,7 @@ This repository contains the code for Reachinbox frontend  App using React with 
 The application is deployed on netlify and can be accessed [here](https://reachinbox-frontend.netlify.app/).
 
 ## Demo Video :- 
+https://drive.google.com/file/d/1ql-09KIkjSQHJn8nNoYKJsF5K2v6rQXs/view?usp=sharing
 
 ## Login Page
 
@@ -22,11 +23,18 @@ The application is deployed on netlify and can be accessed [here](https://reachi
 
 ![Screenshot (346)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/09ff52fd-5880-454f-ae7d-7520b31a6ef7)
 
-## After Login with Dark Mode
+## Deshboard with Dark Mode
  
 ![Screenshot 2024-04-02 213745](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/b507dfc6-bbd4-45ff-b115-296f5e7099d9)
 
-## After Login with Light Mode
+## Dashboard with Light Mode
+
+![Screenshot (355)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/8c2f6406-f4a1-408b-a556-255f80a18993)
+
+## Delete Email 
+
+![Screenshot (356)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/82fb7ea2-2a85-4365-a796-d0d8f89b9e20)
+
 
 
  # How to Run <br/>
