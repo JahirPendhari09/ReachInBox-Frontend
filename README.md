@@ -10,7 +10,7 @@ This repository contains the code for Reachinbox frontend  App using typescript 
 
 ## Deployment
 
-The application is deployed on netlify and can be accessed [here]().
+The application is deployed on netlify and can be accessed [here](https://reachinbox-frontend.netlify.app/).
 
 ## Login Page
 
@@ -21,9 +21,8 @@ The application is deployed on netlify and can be accessed [here]().
 ![Screenshot (346)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/09ff52fd-5880-454f-ae7d-7520b31a6ef7)
 
 ## After Login with Dark Mode
-
-![Screenshot (349)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/491990b3-738f-4118-940f-c4937522dbe8)
-
+ 
+![Screenshot 2024-04-02 213745](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/b507dfc6-bbd4-45ff-b115-296f5e7099d9)
 
 ## After Login with Light Mode
 
@@ -40,13 +39,14 @@ The application is deployed on netlify and can be accessed [here]().
    Install the dependencies:   ``` npm install ``` <br/>
    Start the development server:   ``` npm run start ``` <br/>
    Open your browser and visit:   ``` http://localhost:3000 ``` <br/>
-
    
 
    ## Features 
    
   - Authentication
-  - Manage : read mails , reply and delete
+  - Get Emails
+  - Post (send) Email
+  - Delete Email 
 
  
    # Credits <br/>
