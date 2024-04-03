@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Slidebar from '../components/Slidebar'
 import Theme from '../components/Theme';
 import Workspace from '../components/Workspace';
-import { useLocation } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { jwtDecode } from "jwt-decode";
 import { ChevronDown } from 'lucide-react';
 import { deleteMailResponse, getMailList, getMailMasseges } from '../actions/actions';
@@ -18,6 +18,7 @@ const Desktop = () => {
     const [currColor, setCurrColor] = useState<Boolean>(true);
     const [data , setData ]= useState([]);
     const [singleMail , setSingleMail ]= useState<any>({})
+    const navigate = useNavigate()
 
     const location = useLocation();
     const [ showEmailDesktop,setShowEmailDesktop]= useState(0)
@@ -73,9 +74,7 @@ const Desktop = () => {
         }
     }
 
-    useEffect(()=>{
-        // fetchData()
-    },[singleMail,showEmailDesktop])
+    useEffect(()=>{},[singleMail,showEmailDesktop,isModalOpen])
    
     const handleChangeEmail = (id: number) => {
         getMailMasseges(id).then(messages =>{
@@ -103,20 +102,14 @@ const Desktop = () => {
 
     const deleteEmail =()=>{
         const id:number = singleMail[0].threadId
-        deleteMailResponse(id,token).then((res)=>{
-            alert(`The ${id} has been Deleted Successful`)
-            fetchData()
+        deleteMailResponse(id).then((res)=>{
+            alert(`The ${id} has been Deleted Successful Redirected to Login `);
+            navigate("/")
             closeModal()
         }).catch(err => alert("Error Please try again"))
         
     }
 
-    // useEffect(() => {
-    //     if (emailChanged) {
-    //         fetchData();
-    //         setEmailChanged(false); 
-    //     }
-    // }, [emailChanged]);
 
     let firstName = localStorage.getItem('reachinbox-auth-firstname');
     firstName = firstName ? JSON.parse(firstName):''

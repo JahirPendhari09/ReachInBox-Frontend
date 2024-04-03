@@ -39,7 +39,7 @@ export const postMailMasseges = (id:number,messages:any)=> {
 };
 
 
-export const deleteMailResponse = (id:number,token:string)=> {
+export const deleteMailResponse = (id:number)=> {
     return (axios.delete(`https://hiring.reachinbox.xyz/api/v1/onebox/messages/${id}`,{
         headers: {
             'authorization': `Bearer ${token}`

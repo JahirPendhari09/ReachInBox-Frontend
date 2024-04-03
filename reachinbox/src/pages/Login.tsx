@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom'
 const Login = () => {
 
     useEffect(()=>{
-        localStorage.removeItem("reachinbox-auth");
-        localStorage.removeItem("reachinbox-auth-firstname");
-        localStorage.removeItem("reachinbox-auth-lastname");
-        localStorage.removeItem("reachinbox-auth-email");
+        // localStorage.removeItem("reachinbox-auth");
+        // localStorage.removeItem("reachinbox-auth-firstname");
+        // localStorage.removeItem("reachinbox-auth-lastname");
+        // localStorage.removeItem("reachinbox-auth-email");
     },[])
   return (
     <div className='bg-black max-w-[1440px] h-screen m-auto text-white  flex flex-col justify-between'>
