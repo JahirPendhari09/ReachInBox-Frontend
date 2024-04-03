@@ -1,7 +1,7 @@
 # ReachInBox-Frontend
 
 ## Overview
-This repository contains the code for Reachinbox frontend  App using typescript with react for an assignment given by Reachinbox.
+This repository contains the code for Reachinbox frontend  App using React with Typescript for an assignment given by Reachinbox.
 
 ## Technologies Used ( Frontend )
   - Typescript
@@ -11,6 +11,8 @@ This repository contains the code for Reachinbox frontend  App using typescript 
 ## Deployment
 
 The application is deployed on netlify and can be accessed [here](https://reachinbox-frontend.netlify.app/).
+
+## Demo Video :- 
 
 ## Login Page
 
@@ -25,9 +27,6 @@ The application is deployed on netlify and can be accessed [here](https://reachi
 ![Screenshot 2024-04-02 213745](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/b507dfc6-bbd4-45ff-b115-296f5e7099d9)
 
 ## After Login with Light Mode
-
-
-![Screenshot (350)](https://github.com/JahirPendhari09/ReachInBox-Frontend/assets/128920395/427b446b-f934-4188-9b30-237b6b3a57ad)
 
 
  # How to Run <br/>
@@ -46,7 +45,21 @@ The application is deployed on netlify and can be accessed [here](https://reachi
   - Authentication
   - Get Emails
   - Post (send) Email
-  - Delete Email 
+  - Delete Email
+
+
+   <h2>Endpoints</h2>
+   <h3>All Emails</h3>
+   <pre><code>GET {{baseurl}}/onebox/list </code></pre>
+
+   <h3>All Emails from Onebox</h3>
+   <pre><code>GET {{baseurl}}/onebox/messages/:thread_id </code></pre>
+
+   <h3>Add Onebox Mail</h3>
+   <pre><code>POST {{baseurl}}/onebox/reply/:thread_id </code></pre>
+
+   <h3>Delete Email</h3>
+   <pre><code>DELETE {{baseurl}}/onebox/messages/:thread_id </code></pre>
 
  
    # Credits <br/>
