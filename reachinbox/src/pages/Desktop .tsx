@@ -17,8 +17,8 @@ import { Modal } from './Modal';
 const Desktop = () => {
     const [currColor, setCurrColor] = useState<Boolean>(true);
     const [data , setData ]= useState([]);
-    const [singleMail , setSingleMail ]= useState<any>({})
-    const navigate = useNavigate()
+    const [singleMail , setSingleMail ]= useState<any>({});
+    const [render , setRender]= useState<Boolean>(false)
 
     const location = useLocation();
     const [ showEmailDesktop,setShowEmailDesktop]= useState(0)
@@ -62,7 +62,7 @@ const Desktop = () => {
         localStorage.setItem("reachinbox-auth-email",JSON.stringify((ParseData as any).user.email));
       }
       fetchData()
-    },[token]);
+    },[token,render]);
   
     function takeToken(): string {
         try {
@@ -103,8 +103,8 @@ const Desktop = () => {
     const deleteEmail =()=>{
         const id:number = singleMail[0].threadId
         deleteMailResponse(id).then((res)=>{
-            alert(`The ${id} has been Deleted Successful Redirected to Login `);
-            navigate("/")
+            alert(`The ${id} has been Deleted Successful`);
+            setRender(!render)
             closeModal()
         }).catch(err => alert("Error Please try again"))
         
