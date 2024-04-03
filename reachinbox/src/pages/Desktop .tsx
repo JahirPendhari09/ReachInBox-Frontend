@@ -41,7 +41,7 @@ const Desktop = () => {
             if (res?.length > 0) {
                setSingleMail(res[0]);
                 const id: number = res[0]?.threadId;
-                if (id !== undefined)  return getMailMasseges(id,token);
+                if (id !== undefined)  return getMailMasseges(id);
                 else  console.log("error id not found")
                 
             } else  console.log("Email not Found")
@@ -73,12 +73,13 @@ const Desktop = () => {
         }
     }
 
-    useEffect(()=>{},[singleMail,showEmailDesktop])
+    useEffect(()=>{
+        // fetchData()
+    },[singleMail,showEmailDesktop])
    
     const handleChangeEmail = (id: number) => {
-        getMailMasseges(id,token).then(messages =>{
+        getMailMasseges(id).then(messages =>{
             setSingleMail(messages);
-            setShowEmailDesktop(5)
         }) 
         .catch(error => console.error('Error:', error));
     }
@@ -104,11 +105,18 @@ const Desktop = () => {
         const id:number = singleMail[0].threadId
         deleteMailResponse(id,token).then((res)=>{
             alert(`The ${id} has been Deleted Successful`)
-            // fetchData()
+            fetchData()
             closeModal()
         }).catch(err => alert("Error Please try again"))
         
     }
+
+    // useEffect(() => {
+    //     if (emailChanged) {
+    //         fetchData();
+    //         setEmailChanged(false); 
+    //     }
+    // }, [emailChanged]);
 
     let firstName = localStorage.getItem('reachinbox-auth-firstname');
     firstName = firstName ? JSON.parse(firstName):''

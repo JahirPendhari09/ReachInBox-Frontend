@@ -42,13 +42,12 @@ const SendReply:React.FC<sendReplyProps> = ({currColor,handleCancel,singleMail})
 
   const handlesubmit = () => {
     console.log(formData,"data")
-    postMailMasseges(singleMail.threadId,formData,token).then((res:any)=> {
+    postMailMasseges(singleMail.threadId,formData).then((res:any)=> {
         alert("Reply has been Sended")
-       
     }).catch(err=> console.log(err));
 
   }
-//   console.log(singleMail)
+
   return (
     <div className='flex flex-col w-full h-full '>
         <div>

@@ -1,15 +1,24 @@
 import { ChevronDown, RotateCw } from 'lucide-react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { resetMail } from '../actions/actions'
+import { useNavigate } from 'react-router'
 
 interface headerProps {
     currColor:Boolean
 }
 
 const InboxHeader:React.FC<headerProps> = ({currColor}) => {
+    const navigate =useNavigate()
+    let token:string | null ;
 
-    const handleReset =()=>{
-        // resetMail()
+
+    useEffect(()=>{
+         token = localStorage.getItem("reachinbox-auth");
+         token = token ? JSON.parse(token) : ""; 
+    },[])
+
+    const handleReset = ()=>{
+        resetMail(token).then((res)=> navigate("/"))
     }
     return (<>
     <div className=' w-[160px] flex gap-1 items-center'>
